@@ -1,0 +1,22 @@
+{
+  "name": "birra-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "author": "jmeza",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "jwt-simple": "^0.5.6",
+    "pg-promise": "^10.15.0",
+    "request": "^2.88.2"
+  }
+}

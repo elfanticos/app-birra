@@ -1,0 +1,37 @@
+<div>
+
+  <div>
+    <div>
+      <div>
+        <label for="search">Cercare birra</label>
+        <input type="text">
+      </div>
+      <div>
+        <table>
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>ABV</th>
+              <th>Tag Line</th>
+              <th>vol. ebollizione</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let birra of birres">
+              <td>{{ birra.name }}</td>
+              <td>{{ birra.abv }}</td>
+              <td>{{ birra.tagline }}</td>
+              <td>{{ birra.boil_volume?.value+''+birra.boil_volume?.unit }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div>
+          <button (click)="prevPage()">Prev</button>
+          <button (click)="nextPage()">Next</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

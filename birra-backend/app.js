@@ -18,8 +18,8 @@ app
 	.use(bodyParser.json())
 	//parse application/x-www-form-urlencoded
 	.use(bodyParser.urlencoded({extended : false}))
-	//Cabecera http
 	.use(cors())
+	.use(express.static('public'))
 	.use('/auth',r_auth)
 	.use('/bevanda',r_bevanda)
 

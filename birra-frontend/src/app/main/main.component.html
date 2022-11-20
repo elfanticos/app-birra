@@ -1,37 +1,59 @@
-<div>
+<div class="container container-birra">
+  <div class="container-birra__search">
+    <div class="form-floating col-4">
+      <input type="text" class="form-control" id="search" placeholder="" [formControl]="searchControl"
+        autocomplete="off" maxlength="120">
 
-  <div>
-    <div>
-      <div>
-        <label for="search">Cercare birra</label>
-        <input type="text">
-      </div>
-      <div>
-        <table>
-          <thead>
-            <tr>
-              <th>Nome</th>
-              <th>ABV</th>
-              <th>Tag Line</th>
-              <th>vol. ebollizione</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let birra of birres">
-              <td>{{ birra.name }}</td>
-              <td>{{ birra.abv }}</td>
-              <td>{{ birra.tagline }}</td>
-              <td>{{ birra.boil_volume?.value+''+birra.boil_volume?.unit }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div>
-        <div>
-          <button (click)="prevPage()">Prev</button>
-          <button (click)="nextPage()">Next</button>
-        </div>
+      <label for="user">Cercare birra</label>
+
+    </div>
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        <li class="page-item"><button class="page-link" [class.disabled]="service || page === 1" [disabled]="service" (click)="prevPage()">Prev</button></li>
+        <li class="page-item"><button class="page-link" [class.disabled]="service  || !birres.length" [disabled]="service" (click)="nextPage()">Next</button></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="birra-table">
+    <!--  -->
+    <div class="loader" *ngIf="service">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
       </div>
     </div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>ABV</th>
+          <th>Tag Line</th>
+          <th>vol. ebollizione</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let birra of birres">
+          <td>
+            <div class="container-name">
+              <img [src]="birra.image_url" class="rounded float-start" [alt]="birra.name">
+              <span>{{ birra.name }}</span>
+            </div>
+          </td>
+          <td>{{ birra.abv }}</td>
+          <td>{{ birra.tagline }}</td>
+          <td>{{ birra.boil_volume?.value+''+birra.boil_volume?.unit }}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
+  <div class="pagination-footer">
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        <li class="page-item"><button class="page-link" [class.disabled]="service || page === 1" [disabled]="service" (click)="prevPage()">Prev</button></li>
+        <li class="page-item"><button class="page-link" [class.disabled]="service  || !birres.length" [disabled]="service" (click)="nextPage()">Next</button></li>
+      </ul>
+    </nav>
+  </div>
+  <button class="btn btn-primary" type="button" (click)="logout()">Disconnettersi</button>
+  <br/>
+  <br/>
 </div>

@@ -8,6 +8,7 @@ import { LoginComponent } from './login/login.component';
 import { MainComponent } from './main/main.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RequestInterceptorService } from './interceptors/request.service';
+import { ControlMessagesComponent } from './components/control-messages/control-messages.component';
 
 const REQUEST_INTERCEPTOR = { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptorService, multi: true };
 
@@ -15,7 +16,8 @@ const REQUEST_INTERCEPTOR = { provide: HTTP_INTERCEPTORS, useClass: RequestInter
   declarations: [
     AppComponent,
     LoginComponent,
-    MainComponent
+    MainComponent,
+    ControlMessagesComponent
   ],
   imports: [
     BrowserModule,

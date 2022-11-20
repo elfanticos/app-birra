@@ -12,6 +12,8 @@ import { AuthService } from '../services/auth.service';
 export class LoginComponent implements OnInit {
   formGroup: FormGroup;
   hide = true;
+  invalidLogin = false;
+  msgInvalid = '';
   constructor(
     private _fb: FormBuilder,
     private _authService: AuthService,
@@ -20,7 +22,9 @@ export class LoginComponent implements OnInit {
     this.formGroup = this._builderForm();
   }
 
+
   ngOnInit(): void {
+    this.formGroup.valueChanges.subscribe(() => this.invalidLogin = false);
   }
 
   private _builderForm(): FormGroup {
@@ -33,11 +37,22 @@ export class LoginComponent implements OnInit {
 
   sendForm(): void {
     const values = this.formGroup.value;
+
+    if (this.formGroup.invalid) {
+      Object.keys(values).forEach((key: string) => {
+        this.formGroup.controls[key].markAsTouched();
+        this.formGroup.controls[key].markAsDirty();
+      });
+      return;
+    }
+
     this._authService.login(values.user, values.password).subscribe(res => {
       localStorage.setItem('token', res.token);
       this._router.navigate(['main']);
-    }, err => {
+    }, (err: HttpErrorResponse) => {
       console.log(err);
+      this.msgInvalid = err.error.msg;
+      this.invalidLogin = true;
     });
   }
 }
